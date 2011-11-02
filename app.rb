@@ -26,7 +26,7 @@ end
 post '/stories' do
   puts params.inspect
   #stories = PivotalProject.new(params['projectId'], params['apiToken']).stories
-  stories = []
+  stories = [{:title => 'a'}, {:title => 'b'}]
   
   attachment "stories-#{params['projectId']}-#{Time.now.strftime('%Y%m%d')}.pdf"
   CardGenerator.new(stories).generate
