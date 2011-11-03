@@ -10,9 +10,25 @@ class PivotalProject
   def stories
     response = RestClient.get(url, {'X-TrackerToken' => @api_token})
     doc = Nokogiri::XML(response.body)
-    doc.css('story name').map do |node|
-      {:title => node.text}
-    end
+    doc.css('story').map { |node|
+      story = {}
+      [ 'id',
+        'name',
+        'story_type',
+        'url',
+        'estimate',
+        'description',
+        'current_state',
+        'labels',
+        'created_at',
+        'updated_at'
+      ].each do |attr_name|
+        next unless attr_node = node.at_css(attr_name)
+        
+        story[attr_name.intern] = attr_node.text
+      end
+      story
+    }
   end
 
   private
