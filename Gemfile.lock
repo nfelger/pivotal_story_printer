@@ -4,7 +4,7 @@ GEM
     Ascii85 (1.0.1)
     addressable (2.2.6)
     curb (0.7.15)
-    curb-fu (0.6.1)
+    curb-fu (0.6.0)
       curb (>= 0.5.4.0)
       rack-test (>= 0.2.0)
     fastercsv (1.5.4)
@@ -42,7 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  curb-fu
+  curb-fu (= 0.6.0)
   fastercsv
   heroku
   nokogiri
