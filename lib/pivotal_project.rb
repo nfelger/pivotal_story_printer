@@ -1,4 +1,4 @@
-require 'curb-fu'
+require 'rest_client'
 require 'nokogiri'
 
 class PivotalProject
@@ -8,7 +8,7 @@ class PivotalProject
   end
 
   def stories
-    response = CurbFu.get(:url => url, :headers => {'X-TrackerToken' => @api_token})
+    response = RestClient.get(url, {'X-TrackerToken' => @api_token})
     doc = Nokogiri::XML(response.body)
     doc.css('story name').map do |node|
       {:title => node.text}
