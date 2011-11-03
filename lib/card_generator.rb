@@ -15,10 +15,8 @@ class CardGenerator
 
     between_box_margin = 0.5.cm
 
-    @stories.each do |story|
-      puts story.inspect
+    @stories.each_with_index do |story, index|
       next if story[:story_type] == 'release'
-
 
       pdf.text_box story[:name], :size => 30, :height => 3.cm, :overflow => :shrink_to_fit
       pdf.move_down 3.cm + between_box_margin
@@ -28,7 +26,7 @@ class CardGenerator
 
       bottom_line = "#{story[:story_type].upcase} — #{story[:url]} — printed #{Time.now.strftime('%Y-%m-%d')}"
       pdf.text_box bottom_line, :at => [0, 6], :size => 6, :align => :center
-      pdf.start_new_page
+      pdf.start_new_page unless index == @stories.size - 1
     end
     pdf.render
   end
